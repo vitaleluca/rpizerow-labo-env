@@ -1,10 +1,21 @@
-from gpiozero import LED, Button
-from signal import pause
+from gpiozero import RGBLED, Buzzer
 
-led = LED(26) #declaro pin 26 para enencer el led
-button = Button(18) #declaro pin 18 como entrada
+#declaro los pines 
+ledquique = RGBLED(13,19,26)
+bz = Buzzer(22)
 
-button.when_pressed = led.on #declaro funcion on como encendido 
-button.when_released = led.off #declaro funcion off como apagado
-
-pause() #declaro pause para  pausar el programa
+#creo el bucle para el funcionamiento
+while True: 
+    mensaje = input("ingrese comando: ")
+    if mensaje == 'buzz on':
+        bz.on()
+    if mensaje == 'buzz off':
+        bz.off()
+    if mensaje == 'rgb red':
+        ledquique.color = (1,0,0)
+    if mensaje == 'rgb green':
+        ledquique.color = (0,1,0)
+    if mensaje == 'rgb blue':
+        ledquique.color = (0,0,1)
+    if mensaje == 'quit':
+        break
